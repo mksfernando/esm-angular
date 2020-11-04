@@ -1,0 +1,11 @@
+.wrapper{
+    position: relative;
+    display: flex;
+}
+
+.sidebar{
+    position: fixed;
+    width: 200px;
+    height: 100%;
+    background: #4b4;
+}

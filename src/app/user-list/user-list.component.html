@@ -1,0 +1,53 @@
+<h2>Employee Details</h2>
+
+<div class="input-group mb-3">
+    <div class="input-group-prepend">
+        <button (click)="search()" class="btn btn-outline-secondary" type="button">Search</button>
+        <span class="input-group-text">Minimum Salary $</span>
+    </div>
+    <input (keyup)="minSalary = $event.target.value" type="number" min="0" class="form-control"
+        aria-label="Minimum Salary">
+
+    <div class="input-group-prepend">
+        <span class="input-group-text">Maximum Salary $</span>
+    </div>
+    <input (keyup)="maxSalary = $event.target.value" type="number" min="0" class="form-control"
+        aria-label="Maximum Salaray">
+    <div class="input-group-prepend">
+        <span class="input-group-text">No Of records</span>
+    </div>
+    <input [(ngModel)]="limit" type="number" min="0" class="form-control" aria-label="No of Records to be displayed">
+</div>
+
+<br>
+<div class="alert alert-danger" role="alert" [hidden] = "!showError">
+    <h4 class="alert-heading">Search Criteria Failed!</h4>
+    <p>Couldn't perform a search based on the input paramaters defined</p>
+    <hr>
+    <p class="mb-0">Please check the search parameters.</p>
+</div>
+
+<table class="table" [hidden] = "showError">
+    <thead>
+        <tr>
+            <th (click)="sort('id')">Id</th>
+            <th (click)="sort('login')">Login</th>
+            <th (click)="sort('name')">Name</th>
+            <th (click)="sort('salary')">Salary</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let user of users | orderBy: sortField: sortOrder | paginate: {itemsPerPage:10, currentPage:page};">
+            <td>{{user.id}}</td>
+            <td>{{user.login}}</td>
+            <td>{{user.name}}</td>
+            <td>{{user.salary}}</td>
+            <td>
+                <button type="button" class="btn btn-warning">Edit</button>
+                <button type="button" class="btn btn-danger">Delete</button>                
+            </td>
+        </tr>
+    </tbody>
+    <pagination-controls (pageChange)="page = $event"></pagination-controls>
+</table>

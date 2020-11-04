@@ -1,0 +1,28 @@
+<h2>Upload User Details File</h2>
+<p>
+    Select [.csv] file to upload user data. This operation will persist data to the database.
+</p>
+
+<div class="input-group">
+    <div class="custom-file">
+        <input type="file" class="custom-file-input" id="fileUpload" (change)="setFiles($event.target.files)">
+        <label class="custom-file-label" for="fileUpload">Choose file</label>
+    </div>
+    <div class="input-group-append">
+        <button  (click)="uploadFile()" class="btn btn-outline-secondary" type="button">Upload</button>
+    </div>
+</div>
+<br>
+<div class="alert alert-success" role="alert" [hidden] = "!showSuccess">
+    <h4 class="alert-heading">File Upload Success!</h4>
+    <p>You have successfully uploaded the .csv file and the contents have been successfully persisted in database.</p>
+    <hr>
+    <p class="mb-0">Click "Users" from the navigation bar to search for users.</p>
+</div>
+
+<div class="alert alert-danger" role="alert" [hidden] = "!showError">
+    <h4 class="alert-heading">File Upload Failed!</h4>
+    <p>File upload failed due to format issues of the contents</p>
+    <hr>
+    <p class="mb-0">Please check the file contents whether they are in proper order and format.</p>
+</div>
